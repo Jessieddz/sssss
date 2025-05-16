@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>sheet1</title>
+   <link rel="stylesheet" type="text/css" href="css/font.css">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+  <style>
+
+  * {cursor:url("img6/Metal08.png")16 16,auto;
+    }
+
+  @font-face { 
+            font-family: "Josefin Sans", sans-serif;
+    src: url('font/JosefinSans-VariableFont_wght.ttf');
+    } 
+    @font-face {
+        font-family: "Josefin Sans", sans-serif;
+        font-feature-settings: "aalt"; 
+        src: url('font/JosefinSans-VariableFont_wght.ttf');
+        font-feature-settings: "ss04";
+        unicode-range: U+0052,U+0052 ;}
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --paper-texture: url('img/3075adc6e5e76d8b6b6d9bcd0b2f2da.png');
+      --tabClr: 	rgb(247, 236, 197)
+
+
+;
+      --pageClr:	rgb(247, 236, 197)
+
+;
+    }
+
+    .bookscale {
+      transform: scale(1);
+      transform-origin: center center;
+    }
+
+     body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;       
+  overflow: hidden;     
+}
+
+
+    body h1{
+      font-weight:800;
+      font-size: 100px;
+    }
+
+    .notebook {
+      position: relative;
+      width: 1400px;
+      height: 840px;
+      perspective: 2000px;
+    }
+
+    @media (max-height: 850px) {
+  .notebook {
+    transform: scale(0.85);
+  }
+}
+    .pages {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .page-group {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      transform-origin: center;
+      transition: transform 0.4s ease, background-color 0.3s ease;
+      
+    }
+
+
+    .page-group[data-index="0"] { z-index: 400; }
+    .page-group[data-index="1"] { z-index: 9; }
+    .page-group[data-index="2"] { z-index: 8; }
+    .page-group[data-index="3"] { z-index: 7; }
+    .page-group[data-index="4"] { z-index: 6; }
+    .page-group[data-index="5"] { z-index: 5; }
+      .page-group[data-index="6"] { z-index: 4; }
+    .page-group[data-index="7"] { z-index: 3; }
+     .page-group[data-index="8"] { z-index: 3; }
+      .page-group[data-index="9"] { z-index: 3; }
+
+
+
+    .page {
+      width: 50%;
+      height: 100%;
+      position: relative;
+      transition: background-color 0.3s ease, filter 0.3s ease;
+      background-image: var(--paper-texture);
+      background-size: cover;
+      background-repeat: repeat;
+      background-blend-mode: multiply;
+      background-color: var(--pageClr);
+    }
+
+    .page.left  { border-right: none; }
+    .page.right { border-left: none; }
+
+   
+    .page-group[data-index="0"]  .page.right .tab:nth-of-type(1) { top: -17px; }
+    .page-group[data-index="0"] .page.right .tab:nth-of-type(2) { top: 59px; }
+    .page-group[data-index="0"] .page.right .tab:nth-of-type(3) { top: 135px; }
+    .page-group[data-index="0"] .page.right .tab:nth-of-type(4) { top: 211px; }
+    .page-group[data-index="0"] .page.right .tab:nth-of-type(5) { top: 286px; }
+    .page-group[data-index="0"] .page.right .tab:nth-of-type(6) { top: 362px; }
+    .page-group[data-index="0"] .page.right .tab:nth-of-type(7) { top: 438px; }
+     .page-group[data-index="0"] .page.right .tab:nth-of-type(8) { top: 514px; }
+  
+
+     .tab {
+      width: 100px;
+      height: 40px;
+      background-image: var(--paper-texture);
+      background-size: contain;
+      background-repeat: repeat;
+      background-blend-mode: multiply;
+      background-color: var(--tabClr);
+      color: #333;
+      font-size: 14px;
+      text-align: center;
+      line-height: 15px;
+      border-radius: 10px 10px 0 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s ease, filter 0.3s ease;
+    
+      position: absolute;
+      right: -120px;
+      transform: rotate(90deg);
+      transform-origin: left center;
+    }
+
+
+    .page-group.active-page {
+  z-index: 300 !important; 
+}
+
+.page.right .tab {
+  position: absolute;
+  right: -92px;
+  height: 35px;
+  width: 75px;
+  transform: rotate(90deg) translateY(0); 
+  transform-origin: left center;
+  transition: transform 0.3s ease;
+  will-change: transform;
+  font-size: 10px;
+  
+}
+
+.page.right .tab:hover {
+  transform: rotate(90deg) translateY(-6px);  
+}
+
+
+
+
+  
+    .divider {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,.05), rgba(0,0,0,.2), rgba(0,0,0,.05));
+      border-radius: 2px;
+      box-shadow: 0 0 10px rgba(0,0,0,.1);
+      z-index: 8;
+      pointer-events: none;
+    }
+
+  
+
+    .tab.tab-active {
+  transform: rotate(90deg) translateY(-6px);
+}
+
+.divider{
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:3px;
+  height:100%;
+  background:linear-gradient(
+      to bottom,
+      rgba(0,0,0,.05) 0%,
+      rgba(0,0,0,.2) 50%,
+      rgba(0,0,0,.05) 100%);
+  border-radius:2px;
+  box-shadow:0 0 10px rgba(0,0,0,.1);
+  z-index:500;
+  pointer-events:none;
+
+}
+
+.tab-left {
+  left: -120px;
+  right: auto;
+  transform: rotate(-90deg);
+  transform-origin: right center;
+  position: absolute;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+.tab-left:hover {
+  transform: rotate(-90deg) translateY(-6px);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#ResearchJournal-tab:hover {
+  transform: rotate(-90deg); 
+}
+
+
+        .cover-links {
+      position: absolute;
+      top:8%;
+      left:30%;
+      transform: translate(-50%, -50%);
+      z-index: 500;
+    }
+
+    .cover-links img {
+      max-width: 20%;
+      max-height: 20%;
+      border-radius: 12px;
+     
+      transition: transform 0.3s ease;
+    }
+
+    .cover-links:hover img {
+      transform: scale(1.05);
+    }
+
+
+     .cover-linksk {
+      position: absolute;
+      top:50%;
+      left:59%;
+      transform: translate(-50%, -50%);
+      z-index: 500;
+    }
+
+    .cover-linksk img {
+      max-width: 60%;
+      max-height: 60%;
+      border-radius: 12px;
+     transform: rotate(-90deg);
+      transition: transform 0.3s ease;
+    }
+
+    .cover-linksk:hover img {
+      transform: scale(1);
+    }
+
+
+    .page-image {
+  width:70%;
+  height: 70%;
+  display: block;
+  margin: 160px 100px;
+  border-radius: 12px;
+  
+}
+
+.text-box {
+  padding: 150px 80px;
+  font-family: 'Josefin Sans', sans-serif;
+  color: #333;
+}
+
+
+
+.text-box h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.text-box p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.text-box p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+
+.text-box1  {
+  font-size: 15px;
+  line-height: 1.6;
+  padding: 5px 10px;
+}
+
+.tab-c {
+  position: absolute;
+  top: 0px;
+  right: -0.5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+}
+
+
+.tab p{
+  font-size: 8px;
+}
+
+  
+.image-overlay {
+  position: absolute;
+  top: 10%; 
+  left: 60%;
+  width: 40%; 
+  pointer-events: none;
+  z-index: 700;
+}
+
+
+.image-overlay1 {
+  position: absolute;
+  top: 75%; 
+  left: 2%;
+  width: 20%; 
+  pointer-events: none;
+  z-index: 700;
+}
+  
+
+  </style>
+</head>
+<body>
+  <div class="notebook bookscale">
+    <div class="pages">
+      
+
+     
+      <div class="page-group" data-index="0"><div id="film-canvas"></div><div id="film-canvas-right"></div>
+      
+<div class="page left">
+  <img src="img3/2c20de19119b8ebc4841034966bb102.jpg" class="page-image">
+   <img src="img4/Whitet.png" class="image-overlay"> 
+    <img src="img4/white2.png" class="image-overlay1"> 
+
+  
+  <div class="tab tab-left" data-target="1" data-color="#9ac5c7" style="top: -20px;"><a href="bookdouble1.html">Process</a></div>
+  <div class="tab tab-left"  data-target="2" data-color="#f5b4a4" style="top: 80px;"><a href="bookdouble2.html">Experiments</a></div>
+  <div class="tab tab-left" id="ResearchJournal-tab" data-target="3" data-color="#f7ecc5" style="top: 180px;">Experiments</div>
+
+</div>
+
+
+
+        <div class="page right">
+          <div class="text-box">
+      <h2>Kusama,Yayoi</h2>
+      <p>Yayoi Kusama is a contemporary Japanese artist whose works express the exploration of infinite space and the expression of personal psychological states. In her works, the frequently appearing elements are polka dots and bright colors.I was very lucky to visit Yayoi Kusama's art exhibition held at NGV in Melbourne. Among them, I was particularly interested in the art installation "Flower Obsession". People were invited to fill the red room with red flowers, and they became part of the participation in decorating the room. In this space, the line of sight repeatedly shows bright flowers, as if the whole world is filled with red flowers, and I am also submerged in the ocean of flowers. Such a stunning visual effect inspired me to apply it to my web page production. I find that using linked flowers as elements of web pages can help enhance the interactive effect and create visually appealing effects.</p>
+      <br><p>#CreativeCoding #Contemporary #Style #Interactive</p>
+     
+    </div>
+          
+
+    <div class="tab-c">
+      <div class="tab" data-target="3" data-color="#f7ecc5"><a href="bookdouble3.html">A-3-i</a></div>
+      <div class="tab" data-target="4" data-color="#f7ecc5"><a href="bookdouble4.html">Banister,Cyan</a></div>
+      <div class="tab" data-target="5" data-color="#f7ecc5"><p><a href="bookdouble5.html">BRAVIS INTERNATIONAL</a></p></div>
+      <div class="tab" data-target="6" data-color="#f7ecc5"><a href="bookdouble6.html">Film roll</a></div>
+      <div class="tab" data-target="7" data-color="#f7ecc5"><a href="bookdouble7.html">Interactive insect</a></div>
+       <div class="tab" data-target="8" data-color="#f7ecc5">Kusama,Yayoi</div>
+       <div class="tab" data-target="9" data-color="#f7ecc5"><a href="bookdouble9.html">Latent</a></div>
+         <div class="tab" data-target="10" data-color="#f7ecc5"><a href="bookdouble10.html">Wunderlin, Martina</a></div>
+    </div>
+        
+        </div>
+      </div>
+
+      <div class="cover-links">
+            <a href="books2.html"><img src="img/Web_Photo_Editor2.png" alt="cover">
+          </a>
+        </div>
+
+
+      <div class="page-group" data-index="1"><div class="page left"></div><div class="page right"></div></div>
+      <div class="page-group" data-index="2"><div class="page left"></div><div class="page right"></div></div>
+      <div class="page-group" data-index="3"><div class="page left"></div><div class="page right"></div></div>
+      <div class="page-group" data-index="4"><div class="page left"></div><div class="page right"></div></div>
+      <div class="page-group" data-index="5"><div class="page left"></div><div class="page right"></div></div>
+      <div class="page-group" data-index="6"><div class="page left"></div><div class="page right"></div></div>
+      <div class="page-group" data-index="7"><div class="page left"></div><div class="page right"></div></div>
+           <div class="page-group" data-index="8"><div class="page left"></div><div class="page right"></div></div>
+      <div class="page-group" data-index="9"><div class="page left"></div><div class="page right"></div></div>
+      <div class="page-group" data-index="10"><div class="page left"></div><div class="page right"></div></div>
+
+      <div class="divider"></div>
+    </div>
+  </div>
+
+  <script>
+   
+   const allTabs = document.querySelectorAll('.tab'); 
+const pageGroups = document.querySelectorAll('.page-group');
+const currentIdx = 0;
+
+allTabs.forEach(tab => {
+  const idx = +tab.dataset.target;
+  const color = tab.getAttribute('data-color');
+  const pageGroup = pageGroups[idx];
+
+  const pageL = pageGroup?.querySelector('.page.left');
+  const pageR = pageGroup?.querySelector('.page.right');
+
+
+  tab.style.setProperty('--tabClr', color);
+  pageL?.style.setProperty('--pageClr', color);
+  pageR?.style.setProperty('--pageClr', color);
+
+    if (tab.id === 'experiments-tab') return;
+
+tab.addEventListener('mouseenter', () => {
+
+
+  if (idx > currentIdx && pageGroup) {
+    pageGroup.classList.add('active-page');
+
+    const isLeftTab = tab.classList.contains('tab-left');
+
+    if (isLeftTab) {
+   
+      pageGroup.style.transform = 'translateX(-10px) rotateY(3deg)';
+    } else {
+     
+      pageGroup.style.transform = 'translateX(10px) rotateY(-3deg)';
+    }
+  }
+});
+
+tab.addEventListener('mouseleave', () => {
+  if (idx > currentIdx && pageGroup) {
+    pageGroup.classList.remove('active-page');
+    pageGroup.style.transform = '';
+  }
+});
+
+
+
+  tab.addEventListener('mouseleave', () => {
+    if (idx > currentIdx && pageGroup) {
+      pageGroup.classList.remove('active-page');
+      pageGroup.style.transform = '';
+    }
+  });
+
+ 
+});
+
+
+  </script>
+
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+   
+    <script src="filmba.js"></script>
+
+
+ 
+</body>
+</html>

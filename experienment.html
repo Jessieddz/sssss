@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>experi</title>
+  <link rel="stylesheet" href="css/exsty.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+
+  <style>
+     * {cursor:url("img6/Metal08.png")16 16,auto;
+    }
+
+      @font-face { 
+            font-family: "Josefin Sans", sans-serif;
+    src: url('font/JosefinSans-VariableFont_wght.ttf');
+    } 
+    @font-face {
+        font-family: "Josefin Sans", sans-serif;
+        font-feature-settings: "aalt"; 
+        src: url('font/JosefinSans-VariableFont_wght.ttf');
+        font-feature-settings: "ss04";
+        unicode-range: U+0052,U+0052 ;}
+
+        #filmCanvas {
+  position: absolute;
+  top: -25px; 
+  left: 0;
+  z-index: 1;
+}
+
+  </style>
+</head>
+<body>
+
+<div class="film-wrapper">
+   
+
+  <canvas id="filmCanvas" width="2500" height="900"></canvas>
+   <div id="gif-container" style="position:absolute; top:0; left:0; pointer-events:none;"></div>
+  
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+  <script src="exper.js"></script>  
+  <script src="filmba.js"></script> 
+</body>
+</html>

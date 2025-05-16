@@ -1,0 +1,26 @@
+@font-face {
+ font-family: "Josefin Sans", sans-serif;
+  src: url('font/JosefinSans-VariableFont_wght.ttf');
+}
+
+body {
+  font-family: "Josefin Sans", sans-serif;
+  body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  overflow: hidden;     
+}
+
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ * {cursor:url("img6/Metal08.png")5 5, auto;
+    }
+
+

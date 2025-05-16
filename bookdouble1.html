@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+  <title>sheet1</title>
+   <link rel="stylesheet" type="text/css" href="css/font.css">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+
+ <style>
+ * {cursor:url("img6/Metal08.png")16 16,auto;
+    }
+
+
+  @font-face { 
+            font-family: "Josefin Sans", sans-serif;
+    src: url('font/JosefinSans-VariableFont_wght.ttf');
+    } 
+    @font-face {
+        font-family: "Josefin Sans", sans-serif;
+        font-feature-settings: "aalt"; 
+        src: url('font/JosefinSans-VariableFont_wght.ttf');
+        font-feature-settings: "ss04";
+        unicode-range: U+0052,U+0052 ;}
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --paper-texture: url('img/3075adc6e5e76d8b6b6d9bcd0b2f2da.png');
+      --tabClr: rgba(154, 197, 199, 1)
+;
+      --pageClr: rgba(154, 197, 199, 1)
+;
+    }
+
+    .bookscale {
+      transform: scale(1);
+      transform-origin: center center;
+    }
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;       
+  overflow: hidden;     
+}
+
+
+    body h1{
+      font-weight:800;
+      font-size: 100px;
+    }
+
+    .notebook {
+      position: relative;
+      width: 1400px;
+      height: 840px;
+      perspective: 2000px;
+    }
+
+    @media (max-height: 850px) {
+  .notebook {
+    transform: scale(0.85);
+  }
+}
+
+    .pages {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .page-group {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      transform-origin: center;
+      transition: transform 0.4s ease, background-color 0.3s ease;
+      
+    }
+
+
+    .page-group[data-index="0"] { z-index: 400; }
+    .page-group[data-index="1"] { z-index: 9; }
+    .page-group[data-index="2"] { z-index: 8; }
+    .page-group[data-index="3"] { z-index: 7; }
+    .page-group[data-index="4"] { z-index: 6; }
+    .page-group[data-index="5"] { z-index: 5; }
+
+
+    .page {
+      width: 50%;
+      height: 100%;
+      position: relative;
+      transition: background-color 0.3s ease, filter 0.3s ease;
+      background-image: var(--paper-texture);
+      background-size: cover;
+      background-repeat: repeat;
+      background-blend-mode: multiply;
+      background-color: var(--pageClr);
+    }
+
+    .page.left  { border-right: none; }
+    .page.right { border-left: none; }
+
+   
+    .page-group[data-index="0"]  .page.right .tab:nth-of-type(1) { top: 80px; }
+    .page-group[data-index="0"] .page.right .tab:nth-of-type(2) { top: 180px; }
+    .page-group[data-index="0"] .page.right .tab:nth-of-type(3) { top: 280px; }
+    .page-group[data-index="0"] .page.right .tab:nth-of-type(4) { top: 380px; }
+    .page-group[data-index="0"] .page.right .tab:nth-of-type(5) { top: 480px; }
+
+
+     .tab {
+      width: 100px;
+      height: 40px;
+      background-image: var(--paper-texture);
+      background-size: contain;
+      background-repeat: repeat;
+      background-blend-mode: multiply;
+      background-color: var(--tabClr);
+      color: #333;
+      font-size: 14px;
+      text-align: center;
+      line-height: 15px;
+      border-radius: 10px 10px 0 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s ease, filter 0.3s ease;
+    
+      position: absolute;
+      right: -120px;
+      transform: rotate(90deg);
+      transform-origin: left center;
+    }
+
+    .page-group.active-page {
+  z-index: 300 !important; 
+}
+
+.page.right .tab {
+  position: absolute;
+  right: -120px;
+  transform: rotate(90deg) translateY(0); 
+  transform-origin: left center;
+  transition: transform 0.3s ease;
+  will-change: transform;
+  
+}
+
+.page.right .tab:hover {
+  transform: rotate(90deg) translateY(-6px);  
+}
+
+
+
+  
+    .divider {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,.05), rgba(0,0,0,.2), rgba(0,0,0,.05));
+      border-radius: 2px;
+      box-shadow: 0 0 10px rgba(0,0,0,.1);
+      z-index: 8;
+      pointer-events: none;
+    }
+
+  
+
+    .tab.tab-active {
+  transform: rotate(90deg) translateY(-6px);
+}
+
+.divider{
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:3px;
+  height:100%;
+  background:linear-gradient(
+      to bottom,
+      rgba(0,0,0,.05) 0%,
+      rgba(0,0,0,.2) 50%,
+      rgba(0,0,0,.05) 100%);
+  border-radius:2px;
+  box-shadow:0 0 10px rgba(0,0,0,.1);
+  z-index:350;
+  pointer-events:none;
+}
+
+.tab-left {
+  left: -120px;
+  right: auto;
+  transform: rotate(-90deg);
+  transform-origin: right center;
+  position: absolute;
+  top: -20px; /* 你可以根据需要调整位置 */
+}
+
+
+        .cover-links {
+      position: absolute;
+      top:8%;
+      left:30%;
+      transform: translate(-50%, -50%);
+      z-index: 500;
+    }
+
+    .cover-links img {
+      max-width: 20%;
+      max-height: 20%;
+      border-radius: 12px;
+     
+      transition: transform 0.3s ease;
+    }
+
+    .cover-links:hover img {
+      transform: scale(1.05);
+    }
+
+
+
+
+/* slide */
+.slider-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  z-index: 100;
+}
+
+.slider-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1100px; 
+  height: 1100px;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: none; 
+}
+
+.slide img {
+  width: 1000px;
+  height: 550px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+
+.arrow-btn {
+  font-size: 50px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+}
+
+#btnLeft
+
+
+.slide {
+  width: 100%;
+  height: 100%;
+  display: none; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.caption {
+  margin-top: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.arrow-left {
+  position: absolute;
+  left: 70px;     
+  top: 45%;         
+  transform: translateY(-50%);
+}
+
+.arrow-right {
+  position: absolute;
+  right: 70px;      
+  top: 45%;
+  transform: translateY(-50%);
+}
+
+      
+
+  </style>
+</head>
+<body>
+  
+  <div class="notebook bookscale">
+    <div class="pages">
+      
+      
+      <div class="page-group" data-index="0">
+  
+<div class="slider-overlay">
+  <button class="arrow-btn arrow-left" id="btnLeft">&larr;</button>
+  
+  <div class="slider-container" id="sliderContainer">
+    <section class="slide"><div class="slide-content"><img src="img10/f9b70a0fde9075e2d7259156c81478c.png" alt="flower">
+     <p class="caption">I considered designing my page as an art archive with a few tabs on the right side of the book. When entering the page, I emphasize that the subject is required to unlock the art archive, which guides the user to click and enter.I find that before the web page is fully loaded, other pages will appear instead of the background text. Although I tried to solve this problem, it seemed very difficult for me.</p></div></section>
+    <section class="slide"><div class="slide-content"><img src="img/f5eb8380f5b6e8bb07d4682fb301aff.png" alt="flower">
+     <p class="caption">Archives are a systematic way to save pictures, texts, videos, etc., so I think that flim roll is a physical medium to record visual information, which itself is a part of archives. I visualize the concept of archive and film roll as a visual language to present the process of physical computing experiments. When the viewer slides the mouse, they can feel the simulation of film roll playing. In addition, the retro background of the 'Archive' web page is a spatial cue, allowing users to immerse themselves in the atmosphere of a video archive.</p></div></section>
+     <section class="slide"><div class="slide-content"><img src="img9/82f244fb09d3a52d03a5c014a750e32.jpg" alt="flower">
+     <p class="caption">This is the sketch of "Chindogu" I drew for "useless things". My purpose in designing this is that I often worry about my cat getting sick, especially heart disease.  
+This inspired me to design a sensor that can detect heart rate, which can command the heart-shaped container hanging on the cat's chest to expand and contract with the rhythm of breathing.
+At first, my intention was to design this device specifically for pets, but it seemed inconvenient for cats. Like a useless object. 
+</p></div></section>
+    </div>
+
+  <button class="arrow-btn arrow-right" id="btnRight">&rarr;</button>
+</div>
+
+
+        
+
+        <div class="page left">
+  <div class="tab tab-left">Process</div></div>
+
+  
+
+ 
+
+        <div class="page right">
+          
+        
+         
+          <div class="tab" data-target="1" data-color="#f5b4a4"><a href="bookdouble2.html">Experiments</a></div>
+          <div class="tab" data-target="2" data-color="#f7ecc5"><a href="bookdouble3.html">Reasearch Journal</a></div>
+
+
+        
+        </div>
+      </div>
+
+       <div class="cover-links">
+            <a href="books2.html"><img src="img/Web_Photo_Editor2.png" alt="cover">
+          </a>
+        </div>
+
+        
+
+  
+      <div class="page-group" data-index="1"><div class="page left"></div><div class="page right"></div></div>
+      <div class="page-group" data-index="2"><div class="page left"></div><div class="page right"></div></div>
+      <div class="page-group" data-index="3"><div class="page left"></div><div class="page right"></div></div>
+      <div class="page-group" data-index="4"><div class="page left"></div><div class="page right"></div></div>
+      <div class="page-group" data-index="5"><div class="page left"></div><div class="page right"></div></div>
+
+    
+
+      <div class="divider"></div>
+    </div>
+  </div>
+
+  
+ 
+
+  <script>
+    const tabs       = document.querySelectorAll('.page.right .tab');
+const pageGroups = document.querySelectorAll('.page-group');
+const currentIdx = 0; 
+
+
+
+tabs.forEach(tab => {
+  const idx   = +tab.dataset.target;
+  const color = tab.getAttribute('data-color');
+  const pageR = pageGroups[idx]?.querySelector('.page.right');
+
+ 
+  tab.style.setProperty('--tabClr', color);
+  pageR?.style.setProperty('--pageClr', color);
+
+
+  tab.addEventListener('mouseenter', () => {
+    if (idx > currentIdx && pageGroups[idx]) {
+      pageGroups[idx].classList.add('active-page');
+      pageGroups[idx].style.transform = 'translateX(10px) rotateY(-3deg)';
+    }
+  });
+
+
+  tab.addEventListener('mouseleave', () => {
+    if (idx > currentIdx && pageGroups[idx]) {
+      pageGroups[idx].classList.remove('active-page');
+      pageGroups[idx].style.transform = '';
+    }
+  });
+
+window.addEventListener('DOMContentLoaded', () => {
+  tabs.forEach((tab, i) => {
+    const idx = +tab.dataset.target;
+    const pageGroup = pageGroups[idx];
+
+    if (idx > currentIdx && pageGroup) {
+      setTimeout(() => {
+  
+        pageGroup.classList.add('active-page');
+        pageGroup.style.transform = 'translateX(35px) rotateY(-3deg)';
+
+      
+        requestAnimationFrame(() => {
+          tab.classList.add('tab-active');
+        });
+
+   
+        setTimeout(() => {
+          pageGroup.classList.remove('active-page');
+          pageGroup.style.transform = '';
+          tab.classList.remove('tab-active');
+        }, 400);
+      }, i * 200); 
+    }
+  });
+});
+
+
+  
+});
+
+  </script>
+
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+   
+    <script src="filmba.js"></script>
+
+     <script src="process.js"></script>
+ 
+</body>
+</html>
